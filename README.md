@@ -8,9 +8,9 @@
 
 This extension to [DSpace](http://www.dspace.org) was developed by [The Library Code GmbH](https://www.the-library-code.de) with the support of [Zürcher Hochschule für Angewandte Wissenschaften](https://www.zhaw.ch). It extends DSpace 6.2 JSPUI by an duplication detection.
 
-Enduring the submission, a user should get notified if an item with a similar title is already archived in the repository. The possible duplicates are presented to the user who can decide to remove his/her submission, to decide later about the possible duplicates or to continue the submission nevertheless. This duplication detection should run as early as possible to avoid a lot of work while entering metadata to the submission form.
+During the submission, a user should be notified if an item with a similar title is already archived in the repository. The possible duplicates are presented to the user who can decide to remove his/her submission, to decide later about the possible duplicates, or to continue the submission nevertheless. This duplication detection should run as early as possible to avoid a lot of work while entering metadata to the submission form.
 
-Enduring the workflow step a reviewer is warned if items with a similar title are detected in the repository. The warning gets displayed on the page on which the reviewer decides whether to accept or decline a submission to the repository. A note will be displayed if no duplicates were found.
+During the workflow step, a reviewer is warned if items with a similar title are detected in the repository. The warning gets displayed on the page on which the reviewer decides whether to accept or decline a submission to the repository. A note will be displayed if no duplicates were found.
 
 The Duplication Detection Service looks for items with similar titles. To find items that have similar but not totally equal names, fuzzy search is used. The Levenshtein algorithm performs these searches. It calculates a measure called edit difference. The edit difference counts how many characters have to be deleted, swapped or changed to transform one string into another one. By default, the Duplication Detection Service considers two items as similar if the edit distance between there title does not exceeds 8 changes. This is configurable (see below).
 
@@ -20,7 +20,7 @@ Possible duplicates are listed in a simple citation style containing the names o
 
 ## Prerequisites
 
-In its current form the Duplication Detection Service is developed for DSpace 6.2, JSPUI and PostgreSQL only. Neither XMLUI nor Oracle are supported currently. Why it was **not** tested, it probably will work on newer versions of DSpace 6 as well. It probably won't work without further development on DSpace 7 and above. If you need support to develop a similar solution for XMLUI, do need support for Oracle or any other version of DSpace, please don't hesitate to contact [The Library Code GmbH](https://www.the-library-code.de).
+In its current form, the Duplication Detection Service is developed for DSpace 6.2, JSPUI and PostgreSQL only. Neither XMLUI nor Oracle are supported currently. While it was **not** tested, it probably will work on newer versions of DSpace 6 as well. It probably won't work without further development on DSpace 7 and above. If you need support to develop a similar solution for XMLUI, do need support for Oracle or any other version of DSpace, please don't hesitate to contact [The Library Code GmbH](https://www.the-library-code.de).
 
 Besides the prerequisites of DSpace, the Duplication Detection Service requires the PostgreSQL Extension "fuzzystrmatch" which contains an implementation of the Levenshtein algorithm.
 
@@ -37,7 +37,7 @@ Furthermore, you will need to know how to compile and update DSpace. There are t
 
 ### Install the add-on by changing two poms and the message catalog
 
-Please remind to install the PostgreSQL extension "fuzzystrmatch", as described above.
+Please remember to install the PostgreSQL extension "fuzzystrmatch", as described above.
 To install this add-on using maven's capability to automatically download and include all necessary files, you need to change two pom files and the message catalog.
 
 At the end of the file `[dspace-source]/dspace/modules/additions/pom.xml` you will find a section `<dependencies>...</dependencies>`. At the end of this section, right before the closing tag, you need to add the following lines:
@@ -172,7 +172,7 @@ The Submission workflow needs some additional configuration. One part of the Dup
 
 Reference the step as `<step id="duplicate-detection" />` in the submission definitions, wherever you want to activate it. We suggest activating it before the `DescribeStep` as the duplication detection aims to prevent users from unnecessarily typing metadata of items that are already part of the repository. Following this advice it will probably be the first step or the step after the StartSubmissionLookupStep. See the [DSpace manual](https://wiki.duraspace.org/display/DSDOC6x/Submission+User+Interface) if you have further questions regarding the `item-submission.xml`.
 
-As the Duplication Detection Step requires the user to enter the title the visibility of the title's metadata field should be set to workflow in `input-forms.xml`. This prevents the field from being shown twice in the submission process while it is still being editable in the workflow step. See the [DSpace manual](https://wiki.duraspace.org/display/DSDOC6x/Submission+User+Interface) if you need further guidance on how to achieve that.
+As the Duplication Detection Step requires the user to enter the title, the visibility of the title's metadata field should be set to workflow in `input-forms.xml`. This prevents the field from being shown twice in the submission process while it is still being editable in the workflow step. See the [DSpace manual](https://wiki.duraspace.org/display/DSDOC6x/Submission+User+Interface) if you need further guidance on how to achieve that.
 
 ### DSpace's configuration
 
